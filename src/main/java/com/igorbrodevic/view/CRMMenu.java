@@ -65,7 +65,7 @@ public final class CRMMenu extends CustomComponent {
         menuContent.addStyleName(ValoTheme.MENU_PART);
         menuContent.addStyleName("no-vertical-drag-hints");
         menuContent.addStyleName("no-horizontal-drag-hints");
-        menuContent.setWidth(null);
+        menuContent.setWidth("100%");
         menuContent.setHeight("100%");
 
         menuContent.addComponent(buildTitle());

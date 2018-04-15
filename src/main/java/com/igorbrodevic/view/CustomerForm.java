@@ -21,10 +21,10 @@ public class CustomerForm extends FormLayout {
 
     private CustomerService service = CustomerService.getInstance();
     private Customer customer;
-    private CRMUI CRMUI;
+    private TableView tableView;
 
-    public CustomerForm(CRMUI CRMUI) {
-        this.CRMUI = CRMUI;
+    public CustomerForm(TableView tableView) {
+        this.tableView = tableView;
 
         status.addItems(CustomerStatus.values());
 
@@ -45,20 +45,20 @@ public class CustomerForm extends FormLayout {
 
         BeanFieldGroup.bindFieldsUnbuffered(customer, this);
         delete.setVisible(customer.isPersisted());
-        setVisible(true);
+        //setVisible(true);
         firstName.selectAll();
     }
 
     private void save() {
         service.save(customer);
-         CRMUI.updateList();
-         setVisible(false);
+         tableView.updateList();
+         //setVisible(false);
     }
 
     private void delete() {
         service.delete(customer);
-        CRMUI.updateList();
-        setVisible(false);
+        tableView.updateList();
+        //setVisible(false);
 
     }
 }

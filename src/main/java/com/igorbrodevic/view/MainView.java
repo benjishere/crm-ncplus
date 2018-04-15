@@ -3,6 +3,7 @@ package com.igorbrodevic.view;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.VerticalLayout;
 
 /*
  * Dashboard MainView is a simple HorizontalLayout that wraps the menu on the
@@ -18,11 +19,16 @@ public class MainView extends HorizontalLayout {
 
         addComponent(new CRMMenu());
 
-        ComponentContainer content = new CssLayout();
+        /*ComponentContainer content = new CssLayout();
         content.addStyleName("view-content");
         content.setSizeFull();
         addComponent(content);
-        setExpandRatio(content, 1.0f);
+        setExpandRatio(content, 1.0f);*/
+
+        VerticalLayout tableView = new TableView();
+        tableView.setSizeFull();
+        //setExpandRatio(tableView, 1);
+        addComponent(tableView);
 
     }
 }
