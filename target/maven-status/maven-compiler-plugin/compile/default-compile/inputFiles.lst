@@ -1,1 +1,10 @@
-/Users/igor/Java Codes/crmncplus/src/main/java/com/igorbrodevic/MyUI.java
+/Users/igor/Java Codes/crmncplus/src/main/java/com/igorbrodevic/CRMUI.java
+/Users/igor/Java Codes/crmncplus/src/main/java/com/igorbrodevic/view/CRMMenu.java
+/Users/igor/Java Codes/crmncplus/src/main/java/com/igorbrodevic/view/CustomerForm.java
+/Users/igor/Java Codes/crmncplus/src/main/java/com/igorbrodevic/data/Customer.java
+/Users/igor/Java Codes/crmncplus/src/main/java/com/igorbrodevic/data/CustomerStatus.java
+/Users/igor/Java Codes/crmncplus/src/main/java/com/igorbrodevic/event/CRMEventBus.java
+/Users/igor/Java Codes/crmncplus/src/main/java/com/igorbrodevic/view/LoginView.java
+/Users/igor/Java Codes/crmncplus/src/main/java/com/igorbrodevic/controller/CustomerService.java
+/Users/igor/Java Codes/crmncplus/src/main/java/com/igorbrodevic/domain/User.java
+/Users/igor/Java Codes/crmncplus/src/main/java/com/igorbrodevic/event/CRMEvent.java
