@@ -27,8 +27,10 @@ import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
-/*import com.vaadin.v7.ui.AbstractSelect.AcceptItem;
-import com.vaadin.v7.ui.Table;*/
+import com.vaadin.ui.AbstractSelect.AcceptItem;
+import com.vaadin.ui.Table;
+import com.igorbrodevic.event.CRMEvent.ProfileUpdatedEvent;
+import com.igorbrodevic.event.CRMEvent.UserLoggedOutEvent;
 
 /**
  * A responsive menu component providing user information and the controls for
@@ -37,7 +39,7 @@ import com.vaadin.v7.ui.Table;*/
 @SuppressWarnings({ "serial", "unchecked" })
 public final class CRMMenu extends CustomComponent {
 
-    /*public static final String ID = "dashboard-menu";
+    public static final String ID = "dashboard-menu";
     public static final String REPORTS_BADGE_ID = "dashboard-menu-reports-badge";
     public static final String NOTIFICATIONS_BADGE_ID = "dashboard-menu-notifications-badge";
     private static final String STYLE_VISIBLE = "valo-menu-visible";
@@ -75,7 +77,7 @@ public final class CRMMenu extends CustomComponent {
     }
 
     private Component buildTitle() {
-        Label logo = new Label("QuickTickets <strong>Dashboard</strong>");
+        Label logo = new Label("Pawex - Obsługa klienta");
         logo.setSizeUndefined();
         HorizontalLayout logoWrapper = new HorizontalLayout(logo);
         logoWrapper.setComponentAlignment(logo, Alignment.MIDDLE_CENTER);
@@ -112,7 +114,7 @@ public final class CRMMenu extends CustomComponent {
         settingsItem.addItem("Sign Out", new Command() {
             @Override
             public void menuSelected(final MenuItem selectedItem) {
-                //CRMEventBus.post(new UserLoggedOutEvent());
+                CRMEventBus.post(new UserLoggedOutEvent());
             }
         });
         return settings;
@@ -141,7 +143,7 @@ public final class CRMMenu extends CustomComponent {
         CssLayout menuItemsLayout = new CssLayout();
         menuItemsLayout.addStyleName("valo-menuitems");
 
-        for (final DashboardViewType view : DashboardViewType.values()) {
+        /*for (final DashboardViewType view : DashboardViewType.values()) {
             Component menuItemComponent = new ValoMenuItemButton(view);
 
             if (view == DashboardViewType.REPORTS) {
@@ -185,7 +187,7 @@ public final class CRMMenu extends CustomComponent {
             }
 
             menuItemsLayout.addComponent(menuItemComponent);
-        }
+        }*/
         return menuItemsLayout;
 
     }
@@ -205,16 +207,16 @@ public final class CRMMenu extends CustomComponent {
     @Override
     public void attach() {
         super.attach();
-        updateNotificationsCount(null);
+        //updateNotificationsCount(null);
     }
 
-    @Subscribe
+    /*@Subscribe
     public void postViewChange(final PostViewChangeEvent event) {
         // After a successful view change the menu can be hidden in mobile view.
         getCompositionRoot().removeStyleName(STYLE_VISIBLE);
-    }
+    }*/
 
-    @Subscribe
+    /*@Subscribe
     public void updateNotificationsCount(
             final NotificationsCountUpdatedEvent event) {
         int unreadNotificationsCount = DashboardUI.getDataProvider()
@@ -228,13 +230,13 @@ public final class CRMMenu extends CustomComponent {
         reportsBadge.setValue(String.valueOf(event.getCount()));
         reportsBadge.setVisible(event.getCount() > 0);
     }
-
+*/
     @Subscribe
     public void updateUserName(final ProfileUpdatedEvent event) {
         User user = getCurrentUser();
         settingsItem.setText(user.getFirstName() + " " + user.getLastName());
     }
-
+/*
     public final class ValoMenuItemButton extends Button {
 
         private static final String STYLE_SELECTED = "selected";

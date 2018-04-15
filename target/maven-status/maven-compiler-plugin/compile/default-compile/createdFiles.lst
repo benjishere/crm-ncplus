@@ -2,11 +2,17 @@ com/igorbrodevic/view/CustomerForm.class
 com/igorbrodevic/view/LoginView$1.class
 com/igorbrodevic/data/CustomerStatus.class
 com/igorbrodevic/controller/CustomerService$2.class
+com/igorbrodevic/view/CRMMenu$3.class
+com/igorbrodevic/view/CRMMenu.class
 com/igorbrodevic/CRMUI.class
 com/igorbrodevic/view/LoginView.class
+com/igorbrodevic/view/CRMMenu$2.class
+com/igorbrodevic/view/MainView.class
 com/igorbrodevic/controller/CustomerService.class
 com/igorbrodevic/event/CRMEventBus.class
 com/igorbrodevic/controller/CustomerService$1.class
 com/igorbrodevic/data/Customer.class
 com/igorbrodevic/domain/User.class
+com/igorbrodevic/view/CRMMenu$1.class
 com/igorbrodevic/CRMUI$MyUIServlet.class
+com/igorbrodevic/view/CRMMenu$4.class

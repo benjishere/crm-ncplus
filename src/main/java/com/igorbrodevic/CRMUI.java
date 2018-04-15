@@ -10,6 +10,7 @@ import com.igorbrodevic.event.CRMEvent.UserLoginRequestedEvent;
 import com.igorbrodevic.event.CRMEventBus;
 import com.igorbrodevic.view.CustomerForm;
 import com.igorbrodevic.view.LoginView;
+import com.igorbrodevic.view.MainView;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
@@ -17,6 +18,7 @@ import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.server.*;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import com.igorbrodevic.event.CRMEvent.UserLoggedOutEvent;
 
 import java.util.List;
 import java.util.Locale;
@@ -111,7 +113,7 @@ public class CRMUI extends UI {
     private void updateContent() {
         User user = (User) VaadinSession.getCurrent().getAttribute(User.class.getName());
         if (user != null && "admin".equals(user.getRole())) {
-            setContent(layout);
+            setContent(new MainView());
             removeStyleName("loginview");
             //getNavigator().navigateTo(getNavigator().getState());
         } else {
@@ -133,6 +135,14 @@ public class CRMUI extends UI {
         updateContent();
     }
 
+    @Subscribe
+    public void userLoggedOut(final UserLoggedOutEvent event) {
+        // When the user logs out, current VaadinSession gets closed and the
+        // page gets reloaded on the login screen. Do notice the this doesn't
+        // invalidate the current HttpSession.
+        VaadinSession.getCurrent().close();
+        Page.getCurrent().reload();
+    }
 
     public User authenticate(String userName, String password) {
         User user = new User();
