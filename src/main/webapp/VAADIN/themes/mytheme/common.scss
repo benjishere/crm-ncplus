@@ -25,7 +25,7 @@
 
   .v-ui[width-range~="0-800px"] {
     .valo-menu-title {
-      @include valo-gradient($color: $valo-menu-background-color);
+      @include valo-gradient($color: #414B56); /* TODO $valo-menu-background-color*/
       border-bottom-color: first-color(valo-border($color: $valo-menu-background-color));
     }
     .valo-menu .v-menubar-user-menu {
@@ -271,7 +271,7 @@
     .v-ui {
       @include box-sizing(border-box);
       padding-top: 20px;
-      background-color: $valo-menu-background-color;
+      background-color: #414B56; /* TODO $valo-menu-background-color; */
 
       > .v-widget {
         position: relative !important;

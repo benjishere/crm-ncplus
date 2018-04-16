@@ -98,7 +98,7 @@ public final class CRMMenu extends CustomComponent {
         settingsItem = settings.addItem("",
                 new ThemeResource("img/profile-pic-300px.jpg"), null);
         updateUserName(null);
-        settingsItem.addItem("Edit Profile", new Command() {
+        /*settingsItem.addItem("Edit Profile", new Command() {
             @Override
             public void menuSelected(final MenuItem selectedItem) {
                 //ProfilePreferencesWindow.open(user, false);
@@ -110,8 +110,8 @@ public final class CRMMenu extends CustomComponent {
                 //ProfilePreferencesWindow.open(user, true);
             }
         });
-        settingsItem.addSeparator();
-        settingsItem.addItem("Sign Out", new Command() {
+        settingsItem.addSeparator();*/
+        settingsItem.addItem("Wyloguj", new Command() {
             @Override
             public void menuSelected(final MenuItem selectedItem) {
                 CRMEventBus.post(new UserLoggedOutEvent());

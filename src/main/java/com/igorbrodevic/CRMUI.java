@@ -33,6 +33,8 @@ public class CRMUI extends UI {
     // event bus
     private final CRMEventBus crmEventBus = new CRMEventBus();
 
+    //private final DataProvider dataProvider = new DummyDataProvider();
+
     @Override
     protected void init(VaadinRequest vaadinRequest) {
 
@@ -95,6 +97,10 @@ public class CRMUI extends UI {
     public static CRMEventBus getDashboardEventbus() {
         return ((CRMUI) getCurrent()).crmEventBus;
     }
+
+    /*public static DataProvider getDataProvider() {
+        return ((CRMUI) getCurrent()).dataProvider;
+    }*/
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = CRMUI.class, productionMode = false)
