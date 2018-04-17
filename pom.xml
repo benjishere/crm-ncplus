@@ -89,6 +89,16 @@
 			<artifactId>guava</artifactId>
 			<version>19.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>5.2.12.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.3-1102-jdbc41</version>
+		</dependency>
 	</dependencies>
 
 	<build>

@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import com.google.common.eventbus.Subscribe;
 import com.igorbrodevic.controller.CustomerService;
 import com.igorbrodevic.data.Customer;
+import com.igorbrodevic.data.Customer1;
 import com.igorbrodevic.domain.User;
 import com.igorbrodevic.event.CRMEvent.UserLoginRequestedEvent;
 import com.igorbrodevic.event.CRMEventBus;
@@ -19,6 +20,9 @@ import com.vaadin.server.*;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import com.igorbrodevic.event.CRMEvent.UserLoggedOutEvent;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 import java.util.List;
 import java.util.Locale;
@@ -46,6 +50,17 @@ public class CRMUI extends UI {
         addStyleName(ValoTheme.UI_WITH_MENU);
 
         setLocale(new Locale("pl", "PL"));
+
+        // db start
+        SessionFactory sessionFactory = new Configuration().configure()
+                .buildSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+
+        session.save(new Customer1("IGOR"));
+
+        session.getTransaction().commit();
+        session.close();
 
         updateContent();
     }
