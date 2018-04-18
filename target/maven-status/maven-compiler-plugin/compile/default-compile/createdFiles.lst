@@ -11,6 +11,7 @@ com/igorbrodevic/event/CRMEvent$ReportsCountUpdatedEvent.class
 com/igorbrodevic/CRMUI.class
 com/igorbrodevic/data/Customer1.class
 com/igorbrodevic/event/CRMEvent$ProfileUpdatedEvent.class
+com/igorbrodevic/data/HibernateUtil.class
 com/igorbrodevic/view/ContentView$NotificationsButton.class
 com/igorbrodevic/view/ContentView$DashboardEditListener.class
 com/igorbrodevic/view/ContentView.class

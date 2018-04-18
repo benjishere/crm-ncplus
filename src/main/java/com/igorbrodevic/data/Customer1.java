@@ -13,6 +13,9 @@ import java.util.Date;
 @Entity
 public class Customer1 implements Serializable {
 
+    public Customer1() {
+    }
+
     public Customer1(String fistName, String lastName, String street, String city, Date contractSignedDate,
                      Date contractEndDate, boolean isDomesticClient, Date lastContactDate, CustomerPackage customerPackage,
                      CustomerPackage potentialPackage, Date plannedContactDate) {;
