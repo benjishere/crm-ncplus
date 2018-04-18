@@ -13,8 +13,20 @@ import java.util.Date;
 @Entity
 public class Customer1 implements Serializable {
 
-    public Customer1(String name) {;
-        this.firstName = name;
+    public Customer1(String fistName, String lastName, String street, String city, Date contractSignedDate,
+                     Date contractEndDate, boolean isDomesticClient, Date lastContactDate, CustomerPackage customerPackage,
+                     CustomerPackage potentialPackage, Date plannedContactDate) {;
+        this.firstName = fistName;
+        this.lastName = lastName;
+        this.street = street;
+        this.city = city;
+        this.contractSignedDate = contractSignedDate;
+        this.contractEndDate = contractEndDate;
+        this.isDomesticClient = isDomesticClient;
+        this.lastContactDate = lastContactDate;
+        this.customerPackage = customerPackage;
+        this.potentialPackage = potentialPackage;
+        this.plannedContactDate = plannedContactDate;
     }
 
     @Id
