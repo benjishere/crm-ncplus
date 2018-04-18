@@ -7,6 +7,7 @@ import com.igorbrodevic.controller.CustomerService;
 import com.igorbrodevic.data.Customer;
 import com.igorbrodevic.data.Customer1;
 import com.igorbrodevic.data.CustomerPackage;
+import com.igorbrodevic.data.HibernateUtil;
 import com.igorbrodevic.domain.User;
 import com.igorbrodevic.event.CRMEvent.UserLoginRequestedEvent;
 import com.igorbrodevic.event.CRMEventBus;
@@ -55,25 +56,15 @@ public class CRMUI extends UI {
 
         setLocale(new Locale("pl", "PL"));
 
-        SessionFactory sessionFactory = new Configuration().configure()
-                .buildSessionFactory();
-        Session session = sessionFactory.openSession();
-        insertDataToDB(session);
+        // insert mock data
+        insertDataToDB();
 
         updateContent();
     }
 
-    private void insertDataToDB(Session session) {
-        // db start
+    private void insertDataToDB() {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-
-
-        /*this.contractSignedDate = contractSignedDate;
-        this.contractEndDate = contractEndDate;
-        this.isDomesticClient = isDomesticClient;
-        this.customerPackage = customerPackage;
-        this.potentialPackage = potentialPackage;
-        this.plannedContactDate = plannedContactDate;*/
 
         Date contractSignedDate = new SimpleDateFormat("dd/MM/yyyy").parse("18/08/2017", new ParsePosition(0));
         Date contractEndDate = new SimpleDateFormat("dd/MM/yyyy").parse("18/08/2018", new ParsePosition(0));
@@ -151,7 +142,6 @@ public class CRMUI extends UI {
     public static CRMEventBus getDashboardEventbus() {
         return ((CRMUI) getCurrent()).crmEventBus;
     }
-
     /*public static DataProvider getDataProvider() {
         return ((CRMUI) getCurrent()).dataProvider;
     }*/
