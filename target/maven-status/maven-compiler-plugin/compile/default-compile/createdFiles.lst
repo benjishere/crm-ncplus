@@ -1,5 +1,7 @@
-com/igorbrodevic/view/CustomerForm.class
-com/igorbrodevic/CRMUI.class
-com/igorbrodevic/view/TableView.class
-com/igorbrodevic/view/MainView.class
-com/igorbrodevic/CRMUI$MyUIServlet.class
+com\igorbrodevic\view\LoginView.class
+com\igorbrodevic\view\MainView.class
+com\igorbrodevic\CRMUI$MyUIServlet.class
+com\igorbrodevic\CRMUI.class
+com\igorbrodevic\view\LoginView$1.class
+com\igorbrodevic\view\CustomerForm.class
+com\igorbrodevic\view\TableView.class

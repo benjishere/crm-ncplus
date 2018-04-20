@@ -8,7 +8,7 @@
 
         <!-- Connection settings -->
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost/mydb</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://10.87.65.11/mydb</property>
         <property name="hibernate.connection.username">crmplus</property>
         <property name="hibernate.connection.password">crmplus</property>
 
