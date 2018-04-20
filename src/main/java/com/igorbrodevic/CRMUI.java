@@ -28,6 +28,7 @@ import org.hibernate.cfg.Configuration;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -66,30 +67,37 @@ public class CRMUI extends UI {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
-        Date contractSignedDate = new SimpleDateFormat("dd/MM/yyyy").parse("18/08/2017", new ParsePosition(0));
-        Date contractEndDate = new SimpleDateFormat("dd/MM/yyyy").parse("18/08/2018", new ParsePosition(0));
-        Date plannedContactDate = new SimpleDateFormat("dd/MM/yyyy").parse("18/02/2018", new ParsePosition(0));
-        Date lastContactDate = new SimpleDateFormat("dd/MM/yyyy").parse("3/01/2018", new ParsePosition(0));
+        LocalDate.of(2017, 8, 18);
 
+        //last then planned
         session.save(new Customer1("Igor", "Brodewicz", "Aleja Bohaterów Września 18/70",
-                "Warszawa", contractSignedDate, contractEndDate, true, lastContactDate,CustomerPackage.Silver,
-                CustomerPackage.Gold,  plannedContactDate));
+                "Warszawa", LocalDate.of(2017, 8, 18), LocalDate.of(2018, 8, 18),
+                true, LocalDate.of(2018, 3, 2),CustomerPackage.Silver,
+                CustomerPackage.Gold,  LocalDate.of(2018, 4, 12)));
 
         session.save(new Customer1("Malwina", "Łataś", "Cynkowa 3",
-                "Kielce", contractSignedDate, contractEndDate, true, lastContactDate, CustomerPackage.Gold,
-                CustomerPackage.Silver,  plannedContactDate));
+                "Kielce", LocalDate.of(2014, 12, 3),
+                LocalDate.of(2019, 1, 5), true,
+                LocalDate.of(2018, 3,11), CustomerPackage.Gold,
+                CustomerPackage.Silver,  LocalDate.of(2018, 10, 18)));
 
         session.save(new Customer1("Morus", "Morusiński", "Parapet 3/4",
-                "Rypin", contractSignedDate, contractEndDate, true, lastContactDate, CustomerPackage.Bronze,
-                CustomerPackage.Bronze,  plannedContactDate));
+                "Rypin", LocalDate.of(2016, 7, 10),
+                LocalDate.of(2018, 11, 15), true,
+                LocalDate.of(2018, 3, 22), CustomerPackage.Bronze,
+                CustomerPackage.Bronze,  LocalDate.of(2018, 3, 25)));
 
-        session.save(new Customer1("Jerzy", "Stuhr", "London Street",
-                "Berlin", contractSignedDate, contractEndDate, true, lastContactDate, CustomerPackage.Silver,
-                CustomerPackage.Gold,  plannedContactDate));
+        session.save(new Customer1("Jerzy", "Stuhr", "London Street 11/22",
+                "Berlin", LocalDate.of(2012, 8, 18),
+                LocalDate.of(2019, 6, 9), true,
+                LocalDate.of(2018, 8, 6), CustomerPackage.Silver,
+                CustomerPackage.Gold,  LocalDate.of(2018, 4, 3)));
 
         session.save(new Customer1("Arek", "Milik", "Słoneczna 11",
-                "Neapol", contractSignedDate, contractEndDate, false, lastContactDate, CustomerPackage.Gold,
-                CustomerPackage.Gold,  plannedContactDate));
+                "Neapol", LocalDate.of(2018, 2, 17),
+                LocalDate.of(2019, 2, 18), false,
+                LocalDate.of(2018, 2, 18), CustomerPackage.Gold,
+                CustomerPackage.Gold,  LocalDate.of(2018, 11, 5)));
 
         session.getTransaction().commit();
         session.close();

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -16,9 +17,9 @@ public class Customer1 implements Serializable {
     public Customer1() {
     }
 
-    public Customer1(String fistName, String lastName, String street, String city, Date contractSignedDate,
-                     Date contractEndDate, boolean isDomesticClient, Date lastContactDate, CustomerPackage customerPackage,
-                     CustomerPackage potentialPackage, Date plannedContactDate) {;
+    public Customer1(String fistName, String lastName, String street, String city, LocalDate contractSignedDate,
+                     LocalDate contractEndDate, boolean isDomesticClient, LocalDate lastContactDate, CustomerPackage customerPackage,
+                     CustomerPackage potentialPackage, LocalDate plannedContactDate) {;
         this.firstName = fistName;
         this.lastName = lastName;
         this.street = street;
@@ -40,13 +41,13 @@ public class Customer1 implements Serializable {
     private String lastName = "";
     private String street = "";
     private String city = "";
-    private Date contractSignedDate;
-    private Date contractEndDate;
+    private LocalDate contractSignedDate;
+    private LocalDate contractEndDate;
     private boolean isDomesticClient;
-    private Date lastContactDate;
+    private LocalDate lastContactDate;
     private CustomerPackage customerPackage;
     private CustomerPackage potentialPackage;
-    private Date plannedContactDate;
+    private LocalDate plannedContactDate;
 
     public Long getId() {
         return id;
@@ -87,19 +88,19 @@ public class Customer1 implements Serializable {
         this.city = city;
     }
 
-    public Date getContractSignedDate() {
+    public LocalDate getContractSignedDate() {
         return contractSignedDate;
     }
 
-    public void setContractSignedDate(Date contractSignedDate) {
+    public void setContractSignedDate(LocalDate contractSignedDate) {
         this.contractSignedDate = contractSignedDate;
     }
 
-    public Date getContractEndDate() {
+    public LocalDate getContractEndDate() {
         return contractEndDate;
     }
 
-    public void setContractEndDate(Date contractEndDate) {
+    public void setContractEndDate(LocalDate contractEndDate) {
         this.contractEndDate = contractEndDate;
     }
 
@@ -111,11 +112,11 @@ public class Customer1 implements Serializable {
         isDomesticClient = domesticClient;
     }
 
-    public Date getLastContactDate() {
+    public LocalDate getLastContactDate() {
         return lastContactDate;
     }
 
-    public void setLastContactDate(Date lastContactDate) {
+    public void setLastContactDate(LocalDate lastContactDate) {
         this.lastContactDate = lastContactDate;
     }
 
@@ -135,11 +136,11 @@ public class Customer1 implements Serializable {
         this.potentialPackage = potentialPackage;
     }
 
-    public Date getPlannedContactDate() {
+    public LocalDate getPlannedContactDate() {
         return plannedContactDate;
     }
 
-    public void setPlannedContactDate(Date plannedContactDate) {
+    public void setPlannedContactDate(LocalDate plannedContactDate) {
         this.plannedContactDate = plannedContactDate;
     }
 }
