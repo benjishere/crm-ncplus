@@ -84,6 +84,8 @@ public class LoginView extends VerticalLayout {
         fields.addComponents(username, password, signin);
         fields.setComponentAlignment(signin, Alignment.BOTTOM_LEFT);
 
+        //signin.addClickListener()
+
         signin.addClickListener(new ClickListener() {
             @Override
             public void buttonClick(final ClickEvent event) {

@@ -4,7 +4,6 @@ import com.igorbrodevic.data.Customer;
 import com.igorbrodevic.controller.CustomerService;
 import com.igorbrodevic.data.CustomerStatus;
 import com.igorbrodevic.CRMUI;
-import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
@@ -14,8 +13,8 @@ public class CustomerForm extends FormLayout {
     private TextField firstName = new TextField("First name");
     private TextField lastName = new TextField("Last name");
     private TextField email = new TextField("email");
-    private NativeSelect status = new NativeSelect("Status");
-    private PopupDateField birthDate = new PopupDateField("Birthdate");
+    private NativeSelect status = new NativeSelect<>("Status");
+    private DateField birthDate = new DateField("Birthdate");
     private Button save = new Button("Save");
     private Button delete = new Button("Delete");
 
@@ -26,7 +25,7 @@ public class CustomerForm extends FormLayout {
     public CustomerForm(TableView tableView) {
         this.tableView = tableView;
 
-        status.addItems(CustomerStatus.values());
+        status.setItems(CustomerStatus.values());
 
         save.addStyleName(ValoTheme.BUTTON_PRIMARY);
         save.setClickShortcut(ShortcutAction.KeyCode.ENTER);
@@ -43,7 +42,7 @@ public class CustomerForm extends FormLayout {
     public void setCustomer(Customer customer) {
         this.customer = customer;
 
-        BeanFieldGroup.bindFieldsUnbuffered(customer, this);
+        //BeanFieldGroup.bindFieldsUnbuffered(customer, this);
         delete.setVisible(customer.isPersisted());
         //setVisible(true);
         firstName.selectAll();

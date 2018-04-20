@@ -27,8 +27,6 @@ import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
-import com.vaadin.ui.AbstractSelect.AcceptItem;
-import com.vaadin.ui.Table;
 import com.igorbrodevic.event.CRMEvent.ProfileUpdatedEvent;
 import com.igorbrodevic.event.CRMEvent.UserLoggedOutEvent;
 

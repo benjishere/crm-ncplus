@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-public class Customer1 implements Serializable {
+public final class Customer1 implements Serializable {
 
     public Customer1() {
     }

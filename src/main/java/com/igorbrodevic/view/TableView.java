@@ -4,7 +4,6 @@ import com.igorbrodevic.controller.CustomerService;
 import com.igorbrodevic.data.Customer;
 import com.igorbrodevic.data.Customer1;
 import com.igorbrodevic.data.HibernateUtil;
-import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
@@ -15,7 +14,7 @@ import java.util.List;
 public class TableView extends VerticalLayout {
 
     private CustomerService service = CustomerService.getInstance();
-    private Grid grid = new Grid();
+    private Grid grid = new Grid(Customer1.class);
     private TextField filterText = new TextField();
     private CustomerForm form = new CustomerForm(this);
     VerticalLayout layout = new VerticalLayout();
@@ -49,23 +48,23 @@ public class TableView extends VerticalLayout {
         HorizontalLayout toolbar = new HorizontalLayout(filtering, addCustomerBtn);
         toolbar.setSpacing(true);
 
-        grid.setColumns("firstName", "lastName", "street", "city", "contractSignedDate",
+        /*grid.setColumns("firstName", "lastName", "street", "city", "contractSignedDate",
                 "contractEndDate", "isDomesticClient", "lastContactDate", "customerPackage",
-                "potentialPackage", "plannedContactDate");
+                "potentialPackage", "plannedContactDate");*/
         filtering.addComponents(filterText, clearFilterTextBtn);
         layout.addComponents(toolbar, main);
 
-        filterText.setInputPrompt("wyszukaj...");
-        filterText.addTextChangeListener(e -> {
+        filterText.setPlaceholder("wyszukaj...");
+        filterText.addValueChangeListener(e -> {
             //grid.setContainerDataSource(new BeanItemContainer<>(Customer.class, service.findAll(e.getText())));
         });
 
 
-        grid.addSelectionListener(e -> {
-            if (e.getSelected().isEmpty()) {
+        grid.addSelectionListener(event -> {
+            if (event.getFirstSelectedItem().equals(null)) {
                 //form.setVisible(false);
             } else {
-                Customer customer = (Customer) e.getSelected().iterator().next();
+                Customer customer = (Customer) event.getFirstSelectedItem().get();//event.getSelected().iterator().next();
                 form.setCustomer(customer);
             }
         });
@@ -87,7 +86,13 @@ public class TableView extends VerticalLayout {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         List<Customer1> customers1 = session.createQuery("from Customer1").list();
-        grid.setContainerDataSource(new BeanItemContainer<>(Customer1.class, customers1));
+        grid.setItems(customers1);
+        //grid.addColumn(Customer1::getFirstName); //.setCaption("Name");
+        //grid.addColumn(Person::getBirthYear).setCaption("Year of birth");
+
+
+        //grid.setContainerDataSource(new BeanItemContainer<>(Customer1.class, customers1));
+        session.close();
     }
 
 }

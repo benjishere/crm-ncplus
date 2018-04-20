@@ -17,7 +17,6 @@ import com.igorbrodevic.view.MainView;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
-import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.server.*;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
