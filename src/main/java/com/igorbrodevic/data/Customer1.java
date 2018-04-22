@@ -12,14 +12,14 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-public final class Customer1 implements Serializable {
+public class Customer1 implements Serializable {
 
     public Customer1() {
     }
 
     public Customer1(String fistName, String lastName, String street, String city, LocalDate contractSignedDate,
                      LocalDate contractEndDate, boolean isDomesticClient, LocalDate lastContactDate, CustomerPackage customerPackage,
-                     CustomerPackage potentialPackage, LocalDate plannedContactDate) {;
+                     CustomerPackage potentialPackage, LocalDate plannedContactDate) {
         this.firstName = fistName;
         this.lastName = lastName;
         this.street = street;

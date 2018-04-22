@@ -58,6 +58,9 @@ public class CRMUI extends UI {
 
         // insert mock data
         insertDataToDB();
+        insertDataToDB();
+        insertDataToDB();
+        insertDataToDB();
 
         updateContent();
     }

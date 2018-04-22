@@ -20,8 +20,21 @@
   @include dashboard-sales-view;
   @include dashboard-transactions-view;
   @include dashboard-reports-view;
+
+  // Insert your own theme rules here
+  .v-grid-table {
+      .v-grid-column-header-content {
+          font-size: 12px;
+      }
+      .v-grid-row > td {
+          <!--line-height : 15px;-->
+      }
+  }
+
 }
 
 .valo-menu-part {
     background-color: #414B56;
 }
+
+

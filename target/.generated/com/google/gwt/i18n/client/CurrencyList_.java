@@ -500,7 +500,7 @@ public class CurrencyList_ extends com.google.gwt.i18n.client.CurrencyList {
     // TRL
     result.put("TRL", new CurrencyDataImpl("TRL", "TRL", 128, "TRL", "TRL"));
     // TRY
-    result.put("TRY", new CurrencyDataImpl("TRY", "YTL", 2, "YTL", "YTL"));
+    result.put("TRY", new CurrencyDataImpl("TRY", "TL", 2, "YTL", "TL"));
     // TTD
     result.put("TTD", new CurrencyDataImpl("TTD", "TTD", 2, "TTD", "$"));
     // TWD
@@ -1104,7 +1104,7 @@ public class CurrencyList_ extends com.google.gwt.i18n.client.CurrencyList {
       // TRL
       "TRL": [ "TRL", "TRL", 128, "TRL", "TRL"],
       // TRY
-      "TRY": [ "TRY", "YTL", 2, "YTL", "YTL"],
+      "TRY": [ "TRY", "TL", 2, "YTL", "TL"],
       // TTD
       "TTD": [ "TTD", "TTD", 2, "TTD", "$"],
       // TWD
