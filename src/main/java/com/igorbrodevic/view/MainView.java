@@ -14,25 +14,15 @@ public class MainView extends HorizontalLayout {
 
     public MainView() {
         setSizeFull();
-        //addStyleName("mainview");
         setSpacing(false);
 
-        //
         CRMMenu crmMenu = new CRMMenu();
         addComponent(crmMenu);
 
-        /*ComponentContainer content = new CssLayout();
-        content.addStyleName("view-content");
-        content.setSizeFull();
-        addComponent(content);
-        setExpandRatio(content, 1.0f);*/
-
         VerticalLayout tableView = new TableView();
         tableView.setSizeFull();
-        //setExpandRatio(tableView, 1);
         addComponent(tableView);
-        this.setExpandRatio(tableView, 0.85f);
-        this.setExpandRatio(crmMenu, 0.15f);
+        this.setExpandRatio(tableView, 1);
 
     }
 }

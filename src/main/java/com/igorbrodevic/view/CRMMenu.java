@@ -11,21 +11,12 @@ import com.vaadin.event.dd.acceptcriteria.AcceptCriterion;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button;
+import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.DragAndDropWrapper;
 import com.vaadin.ui.DragAndDropWrapper.DragStartMode;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
-import com.vaadin.ui.UI;
 import com.vaadin.ui.themes.ValoTheme;
 import com.igorbrodevic.event.CRMEvent.ProfileUpdatedEvent;
 import com.igorbrodevic.event.CRMEvent.UserLoggedOutEvent;
@@ -66,7 +57,7 @@ public final class CRMMenu extends CustomComponent {
         menuContent.setWidth("100%");
         menuContent.setHeight("100%");
 
-        menuContent.addComponent(buildTitle());
+        //menuContent.addComponent(buildTitle());
         menuContent.addComponent(buildUserMenu());
         menuContent.addComponent(buildToggleButton());
         menuContent.addComponent(buildMenuItems());
@@ -75,11 +66,18 @@ public final class CRMMenu extends CustomComponent {
     }
 
     private Component buildTitle() {
-        Label logo = new Label("Pawex - Obsługa klienta");
-        logo.setSizeUndefined();
-        HorizontalLayout logoWrapper = new HorizontalLayout(logo);
-        logoWrapper.setComponentAlignment(logo, Alignment.MIDDLE_CENTER);
-        logoWrapper.addStyleName("valo-menu-title");
+        //Label logo = new Label("Pawex - Obsługa klienta");
+        //logo.setSizeUndefined();
+
+        MenuBar menuImage = new MenuBar();
+        Image image = new Image(null,  new ThemeResource("img/Inappi_logo.png"));
+        //menuImage.addItem(image);
+
+        HorizontalLayout logoWrapper = new HorizontalLayout();
+        logoWrapper.addComponent(image);
+        logoWrapper.addStyleName("user-menu");
+        //logoWrapper.setComponentAlignment(logo, Alignment.MIDDLE_CENTER);
+        //logoWrapper.addStyleName("valo-menu-title");
         logoWrapper.setSpacing(false);
         return logoWrapper;
     }

@@ -136,7 +136,7 @@ public class CRMUI extends UI {
 
     public User authenticate(String userName, String password) {
         User user = new User();
-        user.setFirstName("Malwina");
+        user.setFirstName("Paweł");
         user.setLastName("Łataś");
         user.setRole("admin");
         String email = user.getFirstName().toLowerCase() + "."

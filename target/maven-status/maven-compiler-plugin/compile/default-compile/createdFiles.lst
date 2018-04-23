@@ -2,6 +2,7 @@ com/igorbrodevic/view/CustomerForm.class
 com/igorbrodevic/event/CRMEvent$UserLoginRequestedEvent.class
 com/igorbrodevic/view/LoginView$1.class
 com/igorbrodevic/event/CRMEvent$CloseOpenWindowsEvent.class
+com/igorbrodevic/controller/AddCustomer.class
 com/igorbrodevic/event/CRMEvent$NotificationsCountUpdatedEvent.class
 com/igorbrodevic/data/CustomerStatus.class
 com/igorbrodevic/controller/CustomerService$2.class
@@ -13,7 +14,9 @@ com/igorbrodevic/data/Customer1.class
 com/igorbrodevic/event/CRMEvent$ProfileUpdatedEvent.class
 com/igorbrodevic/data/HibernateUtil.class
 com/igorbrodevic/view/ContentView$NotificationsButton.class
+com/igorbrodevic/controller/AddCustomer$2.class
 com/igorbrodevic/view/ContentView$DashboardEditListener.class
+com/igorbrodevic/view/TableView$2.class
 com/igorbrodevic/view/ContentView.class
 com/igorbrodevic/view/TableView.class
 com/igorbrodevic/view/LoginView.class
@@ -22,6 +25,7 @@ com/igorbrodevic/view/MainView.class
 com/igorbrodevic/controller/CustomerService.class
 com/igorbrodevic/event/CRMEvent$UserLoggedOutEvent.class
 com/igorbrodevic/data/CustomerPackage.class
+com/igorbrodevic/controller/AddCustomer$1.class
 com/igorbrodevic/event/CRMEventBus.class
 com/igorbrodevic/controller/CustomerService$1.class
 com/igorbrodevic/event/CRMEvent.class
@@ -29,3 +33,4 @@ com/igorbrodevic/data/Customer.class
 com/igorbrodevic/domain/User.class
 com/igorbrodevic/view/CRMMenu$1.class
 com/igorbrodevic/CRMUI$MyUIServlet.class
+com/igorbrodevic/view/TableView$1.class

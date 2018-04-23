@@ -27,14 +27,19 @@
           font-size: 12px;
       }
       .v-grid-row > td {
-          <!--line-height : 15px;-->
+          /*ine-height : 15px; */
       }
   }
+
+    .table-padding {
+        padding-left: 0px;
+        padding-right: 0px;
+        padding-bottom: 0px;
+    }
 
 }
 
 .valo-menu-part {
     background-color: #414B56;
 }
-
 
