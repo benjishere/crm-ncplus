@@ -1,19 +1,25 @@
 package com.igorbrodevic.view;
 
+import com.google.common.eventbus.Subscribe;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.igorbrodevic.controller.AddCustomer;
 import com.igorbrodevic.controller.CustomerService;
 import com.igorbrodevic.data.Customer1;
 import com.igorbrodevic.data.HibernateUtil;
+import com.igorbrodevic.event.CRMEvent;
+import com.igorbrodevic.event.CRMEventBus;
 import com.vaadin.data.ValueContext;
 import com.vaadin.data.ValueProvider;
 import com.vaadin.data.converter.StringToBooleanConverter;
+import com.vaadin.data.provider.DataProvider;
 import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.event.MouseEvents;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.FontAwesome;
+import com.vaadin.server.Page;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.ui.*;
 import com.vaadin.ui.renderers.HtmlRenderer;
 import com.vaadin.ui.themes.ValoTheme;
@@ -35,15 +41,23 @@ public class TableView extends VerticalLayout {
     private CustomerForm form = new CustomerForm(this);
     VerticalLayout layout = new VerticalLayout();
     private String filterValue = "";
+    private Button editButton;
+    private CRMEventBus crmEventBus;
 
     public TableView() {
+        crmEventBus.register(this);
         setSizeFull();
         CssLayout filtering = new CssLayout();
         filtering.setStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
 
         filterText = buildFilter();
         Button clearFilterTextBtn  = new Button(VaadinIcons.CLOSE_SMALL);
-        grid = updateList();
+
+        grid = new Grid<>(Customer1.class);
+        grid.setSelectionMode(Grid.SelectionMode.SINGLE);
+        initGrid();
+
+        editButton = buildEditButton();
         singleSelect = grid.asSingleSelect();
 
         clearFilterTextBtn.addClickListener(e -> {
@@ -53,22 +67,23 @@ public class TableView extends VerticalLayout {
 
         grid.setSizeFull();
 
-        HorizontalLayout toolbar = new HorizontalLayout(filtering, buildEditButton());
+        HorizontalLayout toolbar = new HorizontalLayout(filtering, buildAddButton(), editButton, buildDeleteButton());
         toolbar.setSpacing(true);
 
         filtering.addComponents(filterText, clearFilterTextBtn);
         layout.addComponents(toolbar, grid);
 
 
-
+/*
         grid.addSelectionListener(event -> {
             if (event.getFirstSelectedItem().equals(null)) {
-                //form.setVisible(false);
+                editButton.setEnabled(false);
             } else {
-                Customer1 customer = (Customer1) event.getFirstSelectedItem().get();//event.getSelected().iterator().next();
+                editButton.setEnabled(true);
+                //Customer1 customer = (Customer1) event.getFirstSelectedItem().get();//event.getSelected().iterator().next();
                 //form.setCustomer(customer);
             }
-        });
+        });*/
 
 
 
@@ -80,11 +95,16 @@ public class TableView extends VerticalLayout {
         addStyleName("table-padding");
     }
 
-    public Grid<Customer1> updateList() {
+    public void updateList() {
+        Collection<Customer1> customer1s = getDataFromDB();
+        System.out.println("UPDATE LIST!!!");
+        ListDataProvider<Customer1> dataProvider = DataProvider.ofCollection(customer1s);
+        grid.setDataProvider(dataProvider);
+    }
+
+    public void initGrid() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        Grid<Customer1> grid = new Grid<>(Customer1.class);
-        grid.setSelectionMode(Grid.SelectionMode.SINGLE);
 
         List<Customer1> customers1 = session.createQuery("from Customer1").list();
 
@@ -109,10 +129,9 @@ public class TableView extends VerticalLayout {
         grid.addColumn(Customer1::getPlannedContactDate).setCaption("Planowany kontakt");
 
         grid.addStyleName("table");
-        grid.setHeightByRows(customers1.size());
 
+        session.getTransaction().commit();
         session.close();
-        return grid;
     }
 
     private TextField buildFilter() {
@@ -160,26 +179,52 @@ public class TableView extends VerticalLayout {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
         List<Customer1> customers1 = session.createQuery("from Customer1").list();
+        session.getTransaction().commit();
         session.close();
         return customers1;
     }
 
-    private Component buildEditButton() {
+    private Component buildAddButton() {
         Button result = new Button();
-        /*result.setIcon(FontAwesome.EDIT);
-        result.addStyleName("icon-edit");
-        result.addStyleName(ValoTheme.BUTTON_ICON_ONLY);*/
-        result.setCaption("Dodaj klienta");
-        //result.setDescription("Edit Dashboard");
+        result.setCaption("Dodaj");
 
-        result.addClickListener(new Button.ClickListener() {
-            @Override
-            public void buttonClick(final Button.ClickEvent event) {
-                getUI().addWindow(
-                        new AddCustomer(getDataFromDB().get(1)));
-            }
+        result.addClickListener(e -> {
+            getUI().addWindow(new AddCustomer(new Customer1()));
         });
         return result;
+    }
+
+    private Button buildEditButton() {
+        Button result = new Button();
+        result.setCaption("Edytuj");
+
+        result.addClickListener(e -> {
+            getUI().addWindow(new AddCustomer(singleSelect.getValue()));
+        });
+
+        return result;
+    }
+
+    private Button buildDeleteButton() {
+        Button result = new Button();
+        result.setCaption("Usuń");
+
+        result.addClickListener(e -> {
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session.beginTransaction();
+            session.delete(singleSelect.getValue());
+            session.getTransaction().commit();
+            session.close();
+
+            updateList();
+        });
+
+        return result;
+    }
+
+    @Subscribe
+    public void tableUpdate(final CRMEvent.UpdatedTableContentEvent event) {
+        updateList();
     }
 
 }

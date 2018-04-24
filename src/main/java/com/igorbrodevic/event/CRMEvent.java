@@ -37,6 +37,9 @@ public abstract class CRMEvent {
 
     }
 
+    public static class UpdatedTableContentEvent {
+    }
+
     public static class NotificationsCountUpdatedEvent {
     }
 

@@ -112,11 +112,4 @@ public class LoginView extends VerticalLayout {
         //setComponentAlignment(image, Alignment.TOP_CENTER);
         return image;*/
     }
-
-   /* private Component buildLogo() {
-
-
-
-    }*/
-
 }

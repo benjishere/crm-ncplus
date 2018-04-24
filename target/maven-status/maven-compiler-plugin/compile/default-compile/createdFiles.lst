@@ -16,7 +16,6 @@ com/igorbrodevic/data/HibernateUtil.class
 com/igorbrodevic/view/ContentView$NotificationsButton.class
 com/igorbrodevic/controller/AddCustomer$2.class
 com/igorbrodevic/view/ContentView$DashboardEditListener.class
-com/igorbrodevic/view/TableView$2.class
 com/igorbrodevic/view/ContentView.class
 com/igorbrodevic/view/TableView.class
 com/igorbrodevic/view/LoginView.class
@@ -32,5 +31,6 @@ com/igorbrodevic/event/CRMEvent.class
 com/igorbrodevic/data/Customer.class
 com/igorbrodevic/domain/User.class
 com/igorbrodevic/view/CRMMenu$1.class
+com/igorbrodevic/event/CRMEvent$UpdatedTableContentEvent.class
 com/igorbrodevic/CRMUI$MyUIServlet.class
 com/igorbrodevic/view/TableView$1.class
