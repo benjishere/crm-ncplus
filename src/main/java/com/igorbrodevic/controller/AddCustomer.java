@@ -7,6 +7,7 @@ import com.igorbrodevic.data.HibernateUtil;
 import com.igorbrodevic.event.CRMEvent;
 import com.igorbrodevic.event.CRMEventBus;
 import com.vaadin.data.Binder;
+import com.vaadin.data.ValidationException;
 import com.vaadin.data.ValueProvider;
 import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.ui.*;
@@ -37,9 +38,9 @@ public class AddCustomer extends Window {
     private final NativeSelect<CustomerPackage> potentialPackage = new NativeSelect<>();
     private final DateField plannedContactDate = new DateField("Data planowanego kontaktu z klientem");
 
+    Binder<Customer1> binder = new Binder<>();
     private CRMEventBus crmEventBus;
-    private Customer1 customer;
-    private boolean isNull;
+    private Customer1 customer1;
 
     public AddCustomer(Customer1 passedCustomer) {
         crmEventBus.register(this);
@@ -50,8 +51,9 @@ public class AddCustomer extends Window {
         setWidth(600.0f, Unit.PIXELS);
 
         addStyleName("edit-dashboard");
+        customer1 = passedCustomer;
 
-        setContent(buildContent(passedCustomer));
+        setContent(buildContent(customer1));
     }
 
     private Component buildContent(Customer1 customer1) {
@@ -62,7 +64,6 @@ public class AddCustomer extends Window {
 
         firstName.focus();
 
-        Binder<Customer1> binder = new Binder<>();
         binder.bind(firstName, Customer1::getFirstName, Customer1::setFirstName);
         binder.bind(lastName, Customer1::getLastName, Customer1::setLastName);
         binder.bind(street, Customer1::getStreet, Customer1::setStreet);
@@ -127,7 +128,12 @@ public class AddCustomer extends Window {
             public void buttonClick(final ClickEvent event) {
                 Session session = HibernateUtil.getSessionFactory().getCurrentSession();
                 session.beginTransaction();
-                session.saveOrUpdate(getCustomer());
+                try {
+                    binder.writeBean(customer1);
+                } catch (ValidationException e) {
+                    e.printStackTrace();
+                }
+                session.saveOrUpdate(customer1);
                 session.getTransaction().commit();
                 session.close();
 

@@ -20,6 +20,8 @@ import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.shared.data.sort.SortDirection;
+import com.vaadin.shared.ui.grid.HeightMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.renderers.HtmlRenderer;
 import com.vaadin.ui.themes.ValoTheme;
@@ -41,7 +43,7 @@ public class TableView extends VerticalLayout {
     private CustomerForm form = new CustomerForm(this);
     VerticalLayout layout = new VerticalLayout();
     private String filterValue = "";
-    private Button editButton;
+    private Button editButton = new Button();
     private CRMEventBus crmEventBus;
 
     public TableView() {
@@ -57,7 +59,7 @@ public class TableView extends VerticalLayout {
         grid.setSelectionMode(Grid.SelectionMode.SINGLE);
         initGrid();
 
-        editButton = buildEditButton();
+        buildEditButton();
         singleSelect = grid.asSingleSelect();
 
         clearFilterTextBtn.addClickListener(e -> {
@@ -66,15 +68,16 @@ public class TableView extends VerticalLayout {
         });
 
         grid.setSizeFull();
+        filtering.addComponents(filterText, clearFilterTextBtn);
 
         HorizontalLayout toolbar = new HorizontalLayout(filtering, buildAddButton(), editButton, buildDeleteButton());
         toolbar.setSpacing(true);
+        toolbar.addStyleName("toolbar-margin");
 
-        filtering.addComponents(filterText, clearFilterTextBtn);
         layout.addComponents(toolbar, grid);
 
 
-/*
+
         grid.addSelectionListener(event -> {
             if (event.getFirstSelectedItem().equals(null)) {
                 editButton.setEnabled(false);
@@ -83,14 +86,15 @@ public class TableView extends VerticalLayout {
                 //Customer1 customer = (Customer1) event.getFirstSelectedItem().get();//event.getSelected().iterator().next();
                 //form.setCustomer(customer);
             }
-        });*/
+        });
 
 
 
         layout.setMargin(false);
         layout.setSpacing(true);
-        layout.addStyleName("table-padding");
-        //layout.setSizeFull();
+        layout.setExpandRatio(grid, 0.9f);
+        layout.setSizeFull();
+
         addComponent(layout);
         addStyleName("table-padding");
     }
@@ -99,14 +103,16 @@ public class TableView extends VerticalLayout {
         Collection<Customer1> customer1s = getDataFromDB();
         System.out.println("UPDATE LIST!!!");
         ListDataProvider<Customer1> dataProvider = DataProvider.ofCollection(customer1s);
+        dataProvider.setSortOrder(Customer1::getId, SortDirection.ASCENDING);
         grid.setDataProvider(dataProvider);
+
     }
 
     public void initGrid() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
 
-        List<Customer1> customers1 = session.createQuery("from Customer1").list();
+        List<Customer1> customers1 = session.createQuery("from Customer1 ORDER BY id").list();
 
         grid.setItems(customers1);
         grid.removeAllColumns();
@@ -178,7 +184,7 @@ public class TableView extends VerticalLayout {
     private List<Customer1> getDataFromDB() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         session.beginTransaction();
-        List<Customer1> customers1 = session.createQuery("from Customer1").list();
+        List<Customer1> customers1 = session.createQuery("from Customer1 ORDER BY id").list();
         session.getTransaction().commit();
         session.close();
         return customers1;
@@ -194,15 +200,14 @@ public class TableView extends VerticalLayout {
         return result;
     }
 
-    private Button buildEditButton() {
-        Button result = new Button();
-        result.setCaption("Edytuj");
+    private void buildEditButton() {
+        editButton.setEnabled(false);
+        editButton.setCaption("Edytuj");
 
-        result.addClickListener(e -> {
+        editButton.addClickListener(e -> {
             getUI().addWindow(new AddCustomer(singleSelect.getValue()));
         });
 
-        return result;
     }
 
     private Button buildDeleteButton() {

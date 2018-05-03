@@ -20,7 +20,6 @@ public class MainView extends HorizontalLayout {
         addComponent(crmMenu);
 
         VerticalLayout tableView = new TableView();
-        tableView.setSizeFull();
         addComponent(tableView);
         this.setExpandRatio(tableView, 1);
 
