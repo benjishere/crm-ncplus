@@ -16,9 +16,11 @@ public class MainView extends HorizontalLayout {
         setSizeFull();
         setSpacing(false);
 
+        // left-side menu
         CRMMenu crmMenu = new CRMMenu();
         addComponent(crmMenu);
 
+        // main content - client table
         VerticalLayout tableView = new TableView();
         addComponent(tableView);
         this.setExpandRatio(tableView, 1);

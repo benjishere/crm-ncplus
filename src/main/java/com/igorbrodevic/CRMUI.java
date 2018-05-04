@@ -58,6 +58,7 @@ public class CRMUI extends UI {
         updateContent();
     }
 
+    // present LoginView if not logged in or MainView
     private void updateContent() {
         User user = (User) VaadinSession.getCurrent().getAttribute(User.class.getName());
         if (user != null && "admin".equals(user.getRole())) {

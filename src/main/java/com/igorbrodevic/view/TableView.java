@@ -3,7 +3,6 @@ package com.igorbrodevic.view;
 import com.google.common.eventbus.Subscribe;
 import com.google.gwt.user.client.ui.ClickListener;
 import com.igorbrodevic.controller.AddCustomer;
-import com.igorbrodevic.controller.CustomerService;
 import com.igorbrodevic.data.Customer1;
 import com.igorbrodevic.data.HibernateUtil;
 import com.igorbrodevic.event.CRMEvent;
@@ -13,7 +12,6 @@ import com.vaadin.data.ValueProvider;
 import com.vaadin.data.converter.StringToBooleanConverter;
 import com.vaadin.data.provider.DataProvider;
 import com.vaadin.data.provider.ListDataProvider;
-import com.vaadin.event.MouseEvents;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
 import com.vaadin.icons.VaadinIcons;
@@ -21,7 +19,6 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.data.sort.SortDirection;
-import com.vaadin.shared.ui.grid.HeightMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.renderers.HtmlRenderer;
 import com.vaadin.ui.themes.ValoTheme;
@@ -36,72 +33,65 @@ import java.util.stream.Collectors;
 
 public class TableView extends VerticalLayout {
 
-    private CustomerService service = CustomerService.getInstance();
+    // table
     private Grid<Customer1> grid;
     private SingleSelect<Customer1> singleSelect;
+
+    // filter textfield
     private TextField filterText = new TextField();
-    private CustomerForm form = new CustomerForm(this);
-    VerticalLayout layout = new VerticalLayout();
     private String filterValue = "";
+
+    // buttons
     private Button editButton = new Button();
-    private CRMEventBus crmEventBus;
+    private Button deleteButton = new Button();
+    private Button clearButton = new Button();
 
     public TableView() {
-        crmEventBus.register(this);
+
+        // register tableview to eventbus
+        CRMEventBus.register(this);
+
         setSizeFull();
         CssLayout filtering = new CssLayout();
         filtering.setStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
 
         filterText = buildFilter();
-        Button clearFilterTextBtn  = new Button(VaadinIcons.CLOSE_SMALL);
 
+        // init and configure grid
         grid = new Grid<>(Customer1.class);
         grid.setSelectionMode(Grid.SelectionMode.SINGLE);
+        grid.setSizeFull();
+        singleSelect = grid.asSingleSelect();
         initGrid();
 
+        // create buttons
         buildEditButton();
-        singleSelect = grid.asSingleSelect();
+        buildDeleteButton();
+        buildClearButton();
 
-        clearFilterTextBtn.addClickListener(e -> {
-            filterText.clear();
-            updateList();
-        });
+        filtering.addComponents(filterText, clearButton);
 
-        grid.setSizeFull();
-        filtering.addComponents(filterText, clearFilterTextBtn);
-
-        HorizontalLayout toolbar = new HorizontalLayout(filtering, buildAddButton(), editButton, buildDeleteButton());
+        HorizontalLayout toolbar = new HorizontalLayout(filtering, buildAddButton(), editButton, deleteButton);
         toolbar.setSpacing(true);
         toolbar.addStyleName("toolbar-margin");
-
-        layout.addComponents(toolbar, grid);
-
-
 
         grid.addSelectionListener(event -> {
             if (event.getFirstSelectedItem().equals(null)) {
                 editButton.setEnabled(false);
+                deleteButton.setEnabled(false);
             } else {
                 editButton.setEnabled(true);
-                //Customer1 customer = (Customer1) event.getFirstSelectedItem().get();//event.getSelected().iterator().next();
-                //form.setCustomer(customer);
+                deleteButton.setEnabled(true);
             }
         });
 
-
-
-        layout.setMargin(false);
-        layout.setSpacing(true);
-        layout.setExpandRatio(grid, 0.9f);
-        layout.setSizeFull();
-
-        addComponent(layout);
+        addComponents(toolbar, grid);
+        setExpandRatio(grid, 0.9f);
         addStyleName("table-padding");
     }
 
     public void updateList() {
         Collection<Customer1> customer1s = getDataFromDB();
-        System.out.println("UPDATE LIST!!!");
         ListDataProvider<Customer1> dataProvider = DataProvider.ofCollection(customer1s);
         dataProvider.setSortOrder(Customer1::getId, SortDirection.ASCENDING);
         grid.setDataProvider(dataProvider);
@@ -210,11 +200,11 @@ public class TableView extends VerticalLayout {
 
     }
 
-    private Button buildDeleteButton() {
-        Button result = new Button();
-        result.setCaption("Usuń");
+    private void buildDeleteButton() {
+        deleteButton.setEnabled(false);
+        deleteButton.setCaption("Usuń");
 
-        result.addClickListener(e -> {
+        deleteButton.addClickListener(e -> {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             session.delete(singleSelect.getValue());
@@ -223,8 +213,15 @@ public class TableView extends VerticalLayout {
 
             updateList();
         });
+    }
 
-        return result;
+    private void buildClearButton() {
+        clearButton.setIcon(VaadinIcons.CLOSE_SMALL);
+
+        clearButton.addClickListener(e -> {
+            filterText.clear();
+            updateList();
+        });
     }
 
     @Subscribe
