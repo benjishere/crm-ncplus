@@ -25,7 +25,7 @@ public class MenuBar_Resources_default_InlineClientBundleGenerator implements co
   }
   private static java.util.HashMap<java.lang.String, com.google.gwt.resources.client.ResourcePrototype> resourceMap;
   private static final java.lang.String externalImage = "data:image/gif;base64,R0lGODlhBQAJAIAAAAAAAAAAACH5BAEAAAEALAAAAAAFAAkAAAIMRB5gp9v2YlJsJRQKADs=";
-  private static final java.lang.String externalImage_rtl = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAYAAAD6reaeAAAAJUlEQVR4XmNgwAT/sQmgCMIE4ILIAmBBdAHcKrFJoACsgiDwHwC9cBjoH6uWhwAAAABJRU5ErkJggg==";
+  private static final java.lang.String externalImage_rtl = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAJCAYAAAD6reaeAAAAIUlEQVR42mNgwAT/sQn8xybwH5vAf2wCuFXiNBOn7XAJAL1wGOgatBIBAAAAAElFTkSuQmCC";
   private static com.google.gwt.resources.client.ImageResource menuBarSubMenuIcon;
   
   public ResourcePrototype[] getResources() {

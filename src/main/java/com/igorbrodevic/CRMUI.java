@@ -55,6 +55,12 @@ public class CRMUI extends UI {
         // set Polish time
         setLocale(new Locale("pl", "PL"));
 
+        /*insertDataToDB();
+        insertDataToDB();
+        insertDataToDB();
+        insertDataToDB();
+        insertDataToDB();*/
+
         updateContent();
     }
 
@@ -102,6 +108,44 @@ public class CRMUI extends UI {
         return user;
     }
 
+    private void insertDataToDB() {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        //last then planned
+        session.save(new Customer1("Igor", "Brodewicz", "512138100", "Aleja Bohaterów Września 18/70",
+                "Warszawa", LocalDate.of(2017, 8, 18), LocalDate.of(2018, 8, 18),
+                true, LocalDate.of(2018, 3, 2), "Srebrny",
+                "Złoty",  LocalDate.of(2018, 4, 12)));
+
+        session.save(new Customer1("Malwina", "Łataś", "511435903", "Cynkowa 3",
+                "Kielce", LocalDate.of(2014, 12, 3),
+                LocalDate.of(2019, 1, 5), true,
+                LocalDate.of(2018, 3,11), "Złoty",
+                "Srebrny",  LocalDate.of(2018, 10, 18)));
+
+        session.save(new Customer1("Morus", "Morusiński", "572334789", "Parapet 3/4",
+                "Rypin", LocalDate.of(2016, 7, 10),
+                LocalDate.of(2018, 11, 15), true,
+                LocalDate.of(2018, 3, 22), "Brązowy",
+                "Brązowy",  LocalDate.of(2018, 3, 25)));
+
+        session.save(new Customer1("Jerzy", "Stuhr", "606770326","London Street 11/22",
+                "Berlin", LocalDate.of(2012, 8, 18),
+                LocalDate.of(2019, 6, 9), true,
+                LocalDate.of(2018, 8, 6), "Srebrny",
+                "Złoty",  LocalDate.of(2018, 4, 3)));
+
+        session.save(new Customer1("Arek", "Milik", "799353688","Słoneczna 11",
+                "Neapol", LocalDate.of(2018, 2, 17),
+                LocalDate.of(2019, 2, 18), false,
+                LocalDate.of(2018, 2, 18), "Złoty",
+                "Złoty",  LocalDate.of(2018, 11, 5)));
+
+        session.getTransaction().commit();
+        session.close();
+    }
+    
     public static CRMEventBus getDashboardEventbus() {
         return ((CRMUI) getCurrent()).crmEventBus;
     }

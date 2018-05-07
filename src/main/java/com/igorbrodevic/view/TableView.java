@@ -109,11 +109,12 @@ public class TableView extends VerticalLayout {
         grid.removeAllColumns();
         grid.addColumn(Customer1::getFirstName).setCaption("Imię");
         grid.addColumn(Customer1::getLastName).setCaption("Nazwisko");
+        grid.addColumn(Customer1::getMobile).setCaption("Nr tel");
         grid.addColumn(Customer1::getCity).setCaption("Miasto");
         grid.addColumn(Customer1::getStreet).setCaption("Ulica");
         grid.addColumn(Customer1::getContractSignedDate).setCaption("Data podpisania");
         grid.addColumn(Customer1::getContractEndDate).setCaption("Koniec umowy");
-        //
+
         StringToBooleanConverter converter = new StringToBooleanConverter("", VaadinIcons.CLOSE_CIRCLE.getHtml(),
                 VaadinIcons.CHECK_CIRCLE.getHtml());
 

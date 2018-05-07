@@ -17,11 +17,12 @@ public class Customer1 implements Serializable {
     public Customer1() {
     }
 
-    public Customer1(String fistName, String lastName, String street, String city, LocalDate contractSignedDate,
-                     LocalDate contractEndDate, boolean isDomesticClient, LocalDate lastContactDate, CustomerPackage customerPackage,
-                     CustomerPackage potentialPackage, LocalDate plannedContactDate) {
+    public Customer1(String fistName, String lastName, String mobile, String street, String city, LocalDate contractSignedDate,
+                     LocalDate contractEndDate, boolean isDomesticClient, LocalDate lastContactDate, String customerPackage,
+                     String potentialPackage, LocalDate plannedContactDate) {
         this.firstName = fistName;
         this.lastName = lastName;
+        this.mobile = mobile;
         this.street = street;
         this.city = city;
         this.contractSignedDate = contractSignedDate;
@@ -39,14 +40,15 @@ public class Customer1 implements Serializable {
 
     private String firstName = "";
     private String lastName = "";
+    private String mobile = "";
     private String street = "";
     private String city = "";
     private LocalDate contractSignedDate;
     private LocalDate contractEndDate;
     private boolean isDomesticClient;
     private LocalDate lastContactDate;
-    private CustomerPackage customerPackage;
-    private CustomerPackage potentialPackage;
+    private String customerPackage = "";
+    private String potentialPackage = "";
     private LocalDate plannedContactDate;
 
     public Long getId() {
@@ -120,19 +122,19 @@ public class Customer1 implements Serializable {
         this.lastContactDate = lastContactDate;
     }
 
-    public CustomerPackage getCustomerPackage() {
+    public String getCustomerPackage() {
         return customerPackage;
     }
 
-    public void setCustomerPackage(CustomerPackage customerPackage) {
+    public void setCustomerPackage(String customerPackage) {
         this.customerPackage = customerPackage;
     }
 
-    public CustomerPackage getPotentialPackage() {
+    public String getPotentialPackage() {
         return potentialPackage;
     }
 
-    public void setPotentialPackage(CustomerPackage potentialPackage) {
+    public void setPotentialPackage(String potentialPackage) {
         this.potentialPackage = potentialPackage;
     }
 
@@ -143,4 +145,8 @@ public class Customer1 implements Serializable {
     public void setPlannedContactDate(LocalDate plannedContactDate) {
         this.plannedContactDate = plannedContactDate;
     }
+
+    public String getMobile() { return mobile; }
+
+    public void setMobile(String  mobile) { this.mobile = mobile; }
 }
