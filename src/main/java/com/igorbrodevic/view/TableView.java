@@ -25,6 +25,7 @@ import com.vaadin.ui.themes.ValoTheme;
 import com.vaadin.ui.Grid;
 import org.hibernate.Session;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
@@ -125,6 +126,12 @@ public class TableView extends VerticalLayout {
         grid.addColumn(Customer1::getPlannedContactDate).setCaption("Planowany kontakt");
 
         grid.addStyleName("table");
+        grid.setStyleGenerator(g -> {
+            if (g.getContractEndDate().minusMonths(3).isBefore(LocalDate.now()))
+                return "error-row";
+            else
+                return null;
+        });
 
         session.getTransaction().commit();
         session.close();
