@@ -36,6 +36,7 @@ public class AddCustomer extends Window {
     //private final boolean isDomesticClient = true;
     private final NativeSelect<String> isDomesticClient = new NativeSelect<>("Narodowość");
     private final DateField lastContactDate = new DateField("Data ostatniego kontaktu");
+    private final TextField lastContantPerson = new TextField("Ostatni kontakt z:");
     private final TextField customerPackage = new TextField("Pakiet klienta");
     private final TextField potentialPackage = new TextField("Potencjalnie zainteresowany");
     private final DateField plannedContactDate = new DateField("Data planowanego kontaktu z klientem");
@@ -75,6 +76,7 @@ public class AddCustomer extends Window {
         binder.bind(contractEndDate, Customer1::getContractEndDate, Customer1::setContractEndDate);
 
         binder.bind(lastContactDate, Customer1::getLastContactDate, Customer1::setLastContactDate);
+        binder.bind(lastContantPerson, Customer1::getLastContactPerson, Customer1::setLastContactPerson);
         binder.bind(plannedContactDate, Customer1::getPlannedContactDate, Customer1::setPlannedContactDate);
 
 
@@ -89,8 +91,8 @@ public class AddCustomer extends Window {
         binder.readBean(customer1);
 
 
-        result1.addComponents(firstName, lastName, mobile, street, city, contractSignedDate);
-        result2.addComponents(isDomesticClient, contractEndDate, customerPackage, potentialPackage, lastContactDate, plannedContactDate);
+        result1.addComponents(firstName, lastName, mobile, street, city, contractSignedDate, isDomesticClient);
+        result2.addComponents(contractEndDate, customerPackage, potentialPackage, lastContactDate, lastContantPerson, plannedContactDate);
         horizontalLayout.addComponents(result1, result2);
 
         finalResult.addComponents(horizontalLayout, buildFooter());
@@ -146,9 +148,9 @@ public class AddCustomer extends Window {
 
 
         Customer1 customer1 = new Customer1(this.firstName.getValue(), this.lastName.getValue(),
-                this.mobile.getValue(), this.street.getValue(),
-                this.city.getValue(), contractSignedDate.getValue(), contractEndDate.getValue(),
-                isDomesticClient, lastContactDate.getValue(), customerPackage.getValue(),
+                this.mobile.getValue(), this.street.getValue(), this.city.getValue(),
+                contractSignedDate.getValue(), contractEndDate.getValue(), isDomesticClient,
+                lastContactDate.getValue(), lastContantPerson.getValue(), customerPackage.getValue(),
                 potentialPackage.getValue(), plannedContactDate.getValue());
 
         return customer1;

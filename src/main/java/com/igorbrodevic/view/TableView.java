@@ -122,6 +122,7 @@ public class TableView extends VerticalLayout {
                 new HtmlRenderer()).setCaption("Zagraniczny");
         //
         grid.addColumn(Customer1::getLastContactDate).setCaption("Ostatni kontakt");
+        grid.addColumn(Customer1::getLastContactPerson).setCaption("Ostatni kontankt z");
         grid.addColumn(Customer1::getCustomerPackage).setCaption("Pakiet");
         grid.addColumn(Customer1::getPotentialPackage).setCaption("Zainteresowany");
         grid.addColumn(Customer1::getPlannedContactDate).setCaption("Planowany kontakt");

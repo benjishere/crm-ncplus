@@ -18,7 +18,8 @@ public class Customer1 implements Serializable {
     }
 
     public Customer1(String fistName, String lastName, String mobile, String street, String city, LocalDate contractSignedDate,
-                     LocalDate contractEndDate, boolean isDomesticClient, LocalDate lastContactDate, String customerPackage,
+                     LocalDate contractEndDate, boolean isDomesticClient, LocalDate lastContactDate,
+                     String lastContactPerson, String customerPackage,
                      String potentialPackage, LocalDate plannedContactDate) {
         this.firstName = fistName;
         this.lastName = lastName;
@@ -29,6 +30,7 @@ public class Customer1 implements Serializable {
         this.contractEndDate = contractEndDate;
         this.isDomesticClient = isDomesticClient;
         this.lastContactDate = lastContactDate;
+        this.lastContactPerson = lastContactPerson;
         this.customerPackage = customerPackage;
         this.potentialPackage = potentialPackage;
         this.plannedContactDate = plannedContactDate;
@@ -47,6 +49,7 @@ public class Customer1 implements Serializable {
     private LocalDate contractEndDate;
     private boolean isDomesticClient;
     private LocalDate lastContactDate;
+    private String lastContactPerson = "";
     private String customerPackage = "";
     private String potentialPackage = "";
     private LocalDate plannedContactDate;
@@ -149,4 +152,8 @@ public class Customer1 implements Serializable {
     public String getMobile() { return mobile; }
 
     public void setMobile(String  mobile) { this.mobile = mobile; }
+
+    public String getLastContactPerson() { return lastContactPerson; }
+
+    public void setLastContactPerson(String lastContactPerson) { this.lastContactPerson = lastContactPerson; }
 }
