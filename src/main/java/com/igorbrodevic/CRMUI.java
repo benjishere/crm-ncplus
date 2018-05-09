@@ -18,6 +18,7 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
 import com.vaadin.server.*;
+import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import com.igorbrodevic.event.CRMEvent.UserLoggedOutEvent;
@@ -37,6 +38,7 @@ import java.util.Locale;
  */
 @Theme("mytheme")
 @Widgetset("com.igorbrodevic.MyAppWidgetset")
+@SpringUI
 public class CRMUI extends UI {
 
     // event bus
@@ -153,8 +155,8 @@ public class CRMUI extends UI {
         return ((CRMUI) getCurrent()).dataProvider;
     }*/
 
-    @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
+    /*@WebServlet(urlPatterns = "/*", asyncSupported = true)
     @VaadinServletConfiguration(ui = CRMUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
-    }
+    }*/
 }

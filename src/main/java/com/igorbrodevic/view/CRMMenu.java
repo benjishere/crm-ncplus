@@ -11,6 +11,7 @@ import com.vaadin.event.dd.acceptcriteria.AcceptCriterion;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinSession;
+import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -26,6 +27,7 @@ import com.igorbrodevic.event.CRMEvent.UserLoggedOutEvent;
  * primary navigation between the views.
  */
 @SuppressWarnings({ "serial", "unchecked" })
+@UIScope
 public final class CRMMenu extends CustomComponent {
 
     public static final String ID = "dashboard-menu";
